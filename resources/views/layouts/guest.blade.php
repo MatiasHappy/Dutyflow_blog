@@ -30,6 +30,9 @@
               
                           <div class="flex items-center space-x-6">
                             @auth
+                            @if(Auth::user()->is_admin)
+                            <a href="{{ route('dashboard') }}" class="text-sm font-medium text-white hover:text-gray-100">Admin Dashboard</a>
+                        @endif
                             <a href="{{ route('profile.edit') }}" class="text-sm font-medium text-white hover:text-gray-100">Profile</a>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
