@@ -98,7 +98,7 @@
         <h1 class=" font-SourceSans text-4xl font-bold text-duty  tracking-tight  lg:text-6xl">WELCOME TO DUTYFLOW</h1>
       
         <p class="mt-4 text-2xl text-gray-700">Discover insightful articles on productivity, healthy living, and personal organization. Join our community and start your journey towards a more organized and enjoyable lifestyle with DutyFlow.</p>
-        <a href="#memberships" class="mt-8 inline-block rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-duty hover:text-white">See Memberships</a>
+        <a href="#memberships" class="flex mt-8 justify-center rounded-md bg-duty px-6 py-4 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-fun focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fun tracking-widest font-NovecentoCondBold uppercase">See Memberships</a>
       </div>
     </div>
   
@@ -112,7 +112,7 @@
           <div class="bg-white">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
               <div class="mx-auto max-w-4xl text-center">
-                <h2 class="text-base font-semibold leading-7 text-duty font-SourceSans">Memberships</h2>
+                <h2 class="text-base font-semibold leading-7 uppercase text-duty font-NovecentoCondBold">Memberships</h2>
                 <p class="mt-2 text-4xl uppercase font-SourceSans font-bold tracking-tight text-gray-900 sm:text-4xl">Pricing plans for every Household</p>
               </div>
               <p class="mx-auto mt-2 max-w-2xl text-center text-lg leading-8 text-gray-600">Choose an affordable plan that’s packed with the best features for organizing your daily life, incorporating healthy habits, and ensuring a balanced lifestyle.</p>
@@ -130,8 +130,10 @@
                         <!-- Payment frequency, update based on frequency toggle state -->
                         <span class="text-sm font-semibold leading-6 text-gray-600">/month</span>
                     </p>
-                    <a href="#" aria-describedby="tier-{{ Str::slug($membership->name) }}" class="mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 text-duty ring-1 ring-inset ring-duty hover:ring-fun focus-visible:outline hover:bg-duty hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-duty">BUY PLAN</a>
+                    <a href="#" aria-describedby="tier-{{ Str::slug($membership->name) }}" class="flex mt-8 justify-center rounded-md bg-duty px-4 py-2 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-fun focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fun tracking-widest font-NovecentoCondBold uppercase">Subscribe</a>
+                    @if(is_array($membership->features))
                     <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 xl:mt-10">
+                      
                         @foreach($membership->features as $feature)
                         <li class="flex gap-x-3">
                             <svg class="h-6 w-5 flex-none text-fun" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -141,6 +143,9 @@
                         </li>
                         @endforeach
                     </ul>
+                    @else
+                                <p>No features listed</p>
+                            @endif
                 </div>
                 @endforeach
             </div>
@@ -181,7 +186,7 @@
                     Level Up Your Life 
                   </h2>
                   <p class="mt-3 text-xl text-white">Make your daily routine beautiful and organized. Download DutyFlow, share your productivity journey on social media, and watch as it garners more attention than life-changing announcements. Embrace the irony and find joy in a well-organized life. At least you’ll have a perfectly balanced and satisfying routine!</p>
-                  <a href="#" class="mt-8 block w-full rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-gray-900 hover:bg-gray-100 sm:w-auto hover:bg-fun hover:text-white">Download Now!</a>
+                  <a href="#" class="flex mt-8  justify-center rounded-md bg-fun px-6 py-4 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-fun hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fun tracking-widest font-NovecentoCondBold uppercase">Download Now!</a>
                 </div>
               </div>
               <div class="relative  bg-white flex ">

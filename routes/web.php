@@ -61,7 +61,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/admin/memberships', [AdminController::class, 'membershipsIndex'])->name('admin.memberships.index');
     Route::get('/admin/memberships/create', [MembershipController::class, 'create'])->name('admin.memberships.create');
-    Route::post('/admin/memberships', [MembershipController::class, 'store'])->name('admin.memberships.store');
+    Route::post('/admin/memberships', [MembershipController::class, 'storeMembership'])->name('admin.memberships.store');
     Route::get('/admin/memberships/{membership}/edit', [MembershipController::class, 'edit'])->name('admin.memberships.edit');
     Route::put('/admin/memberships/{membership}', [MembershipController::class, 'update'])->name('admin.memberships.update');
     Route::delete('/admin/memberships/{membership}', [MembershipController::class, 'destroy'])->name('admin.memberships.destroy');

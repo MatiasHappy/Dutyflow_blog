@@ -2,6 +2,8 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+   
+<div class='w-1/2 m-auto py-12'>
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
@@ -39,9 +41,10 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="ms-3 bg-duty ">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
     </form>
+</div>
 </x-guest-layout>

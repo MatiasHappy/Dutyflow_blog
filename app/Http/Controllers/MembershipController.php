@@ -34,11 +34,48 @@ class MembershipController extends Controller
         return view('admin.memberships.edit', compact('membership'));
     }
 
+    public function storeMembership(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'features' => 'nullable|string',
+        ]);
+    
+        $features = array_filter(array_map('trim', explode("\n", $request->features)));
+    
+        Membership::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'features' => $features,
+        ]);
+    
+        return redirect()->route('admin.memberships.index')->with('success', 'Membership created successfully.');
+    }
+    
     public function update(Request $request, Membership $membership)
     {
-        $membership->update($request->all());
-        return redirect()->route('admin.memberships.index');
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'features' => 'nullable|string',
+        ]);
+    
+        $features = array_filter(array_map('trim', explode("\n", $request->features)));
+    
+        $membership->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'features' => $features,
+        ]);
+    
+        return redirect()->route('admin.memberships.index')->with('success', 'Membership updated successfully.');
     }
+    
 
     public function destroy(Membership $membership)
     {

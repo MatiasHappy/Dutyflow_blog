@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center  bg-gray-100">
+        <div class="min-h-screen flex flex-col  items-center  bg-gray-100">
           
 
             <div class="w-full   bg-white shadow-md overflow-hidden">
@@ -29,8 +29,16 @@
                         
               
                           <div class="flex items-center space-x-6">
-                            <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
-                            <a href="#" class="text-sm font-medium text-white hover:text-gray-100">Create an account</a>
+                            @auth
+                            <a href="{{ route('profile.edit') }}" class="text-sm font-medium text-white hover:text-gray-100">Profile</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="text-sm font-medium text-white hover:text-gray-100">Logout</button>
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
+                            <a href="{{ route('register') }}" class="text-sm font-medium text-white hover:text-gray-100">Create an account</a>
+                        @endauth
                           </div>
                         </div>
                       </div>

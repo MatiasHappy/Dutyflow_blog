@@ -15,7 +15,7 @@ class BlogPost extends Model
         'user_id',
         'published_at',
         'image',
-        'category_id', // Add category_id to fillable
+        'category_id', 
     ];
 
     public function user()

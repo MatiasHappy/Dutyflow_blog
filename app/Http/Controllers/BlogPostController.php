@@ -19,31 +19,29 @@ class BlogPostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+    return view('admin.posts.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'published_at' => 'nullable|date',
-            'image' => 'nullable|image|max:2048',
-            'category_id' => 'nullable|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $path = $request->file('image') ? $request->file('image')->store('images') : null;
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $data['image'] = $path;
+        }
 
-        BlogPost::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'user_id' => Auth::id(),
-            'published_at' => $request->published_at,
-            'image' => $path,
-            'category_id' => $request->category_id,
-        ]);
+        $data['user_id'] = auth()->id();
+        BlogPost::create($data);
 
-        return redirect()->route('admin.posts.index');
+        return redirect()->route('admin.posts.index')->with('success', 'Post created successfully.');
     }
 
     public function edit(BlogPost $post)
@@ -56,26 +54,24 @@ class BlogPostController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required',
+            'content' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
             'published_at' => 'nullable|date',
-            'image' => 'nullable|image|max:2048',
-            'category_id' => 'nullable|exists:categories,id',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
+    
+        $data = $request->all();
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images');
-            $post->image = $path;
+            if ($post->image) {
+                Storage::disk('public')->delete($post->image);
+            }
+            $path = $request->file('image')->store('images', 'public');
+            $data['image'] = $path;
         }
-
-        $post->update([
-            'title' => $request->title,
-            'content' => $request->content,
-            'published_at' => $request->published_at,
-            'image' => $post->image,
-            'category_id' => $request->category_id,
-        ]);
-
-        return redirect()->route('admin.posts.index');
+    
+        $post->update($data);
+    
+        return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
     }
 
     public function destroy(BlogPost $post)

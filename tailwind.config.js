@@ -31,6 +31,12 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 'SourceSans': ['source sans', 'sans-serif'],
+                'NovecentoBookRegular': ['Novecento Book Regular', 'sans-serif'],
+                'NovecentoMedium': ['Novecento Medium', 'sans-serif'],
+                'NovecentoRegular': ['Novecento Regular', 'sans-serif'],
+                'NovecentoCondLight': ['Novecento Cond Light', 'sans-serif'],
+                'NovecentoCondRegular': ['Novecento Cond Regular', 'sans-serif'],
+                'NovecentoCondBold': ['Novecento Cond Bold', 'sans-serif'],
             },
         },
     },
