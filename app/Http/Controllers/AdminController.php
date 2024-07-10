@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use  App\Models\Membership;
-
+use  App\Models\Subscription;
 class AdminController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        // Fetch users with their active subscriptions and memberships
+        $users = User::with(['activeSubscription.membership'])->get();
+
         return view('dashboard', compact('users'));
     }
 

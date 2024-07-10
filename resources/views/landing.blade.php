@@ -111,48 +111,46 @@
 
           <div class="bg-white">
             <div class="mx-auto max-w-7xl px-6 lg:px-8">
-              <div class="mx-auto max-w-4xl text-center">
-                <h2 class="text-base font-semibold leading-7 uppercase text-duty font-NovecentoCondBold">Memberships</h2>
-                <p class="mt-2 text-4xl uppercase font-SourceSans font-bold tracking-tight text-gray-900 sm:text-4xl">Pricing plans for every Household</p>
-              </div>
-              <p class="mx-auto mt-2 max-w-2xl text-center text-lg leading-8 text-gray-600">Choose an affordable plan that’s packed with the best features for organizing your daily life, incorporating healthy habits, and ensuring a balanced lifestyle.</p>
-              
-              <div class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-                @foreach($memberships as $membership)
-                <div class="rounded-3xl p-8 ring-2 ring-duty xl:p-10">
-                    <div class="flex items-center justify-between gap-x-4">
-                        <h3 id="tier-{{ Str::slug($membership->name) }}" class="text-lg font-semibold leading-8 text-gray-900">{{ $membership->name }}</h3>
-                    </div>
-                    <p class="mt-4 text-sm leading-6 text-gray-600">{{ $membership->description }}</p>
-                    <p class="mt-6 flex items-baseline gap-x-1">
-                        <!-- Price, update based on frequency toggle state -->
-                        <span class="text-4xl font-bold tracking-tight text-gray-900">${{ $membership->price }}</span>
-                        <!-- Payment frequency, update based on frequency toggle state -->
-                        <span class="text-sm font-semibold leading-6 text-gray-600">/month</span>
-                    </p>
-                    <a href="#" aria-describedby="tier-{{ Str::slug($membership->name) }}" class="flex mt-8 justify-center rounded-md bg-duty px-4 py-2 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-fun focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fun tracking-widest font-NovecentoCondBold uppercase">Subscribe</a>
-                    @if(is_array($membership->features))
-                    <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 xl:mt-10">
-                      
-                        @foreach($membership->features as $feature)
-                        <li class="flex gap-x-3">
-                            <svg class="h-6 w-5 flex-none text-fun" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
-                            </svg>
-                            {{ $feature }}
-                        </li>
-                        @endforeach
-                    </ul>
-                    @else
-                                <p>No features listed</p>
-                            @endif
+                <div class="mx-auto max-w-4xl text-center">
+                    <h2 class="text-base font-semibold leading-7 uppercase text-duty font-NovecentoCondBold">Memberships</h2>
+                    <p class="mt-2 text-4xl uppercase font-SourceSans font-bold tracking-tight text-gray-900 sm:text-4xl">Pricing plans for every Household</p>
                 </div>
-                @endforeach
+                <p class="mx-auto mt-2 max-w-2xl text-center text-lg leading-8 text-gray-600">Choose an affordable plan that’s packed with the best features for organizing your daily life, incorporating healthy habits, and ensuring a balanced lifestyle.</p>
+                
+                <div class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                    @foreach($memberships as $membership)
+                    <div class="rounded-3xl p-8 ring-2 ring-duty xl:p-10">
+                        <div class="flex items-center justify-between gap-x-4">
+                            <h3 id="tier-{{ Str::slug($membership->name) }}" class="text-lg font-semibold leading-8 text-gray-900">{{ $membership->name }}</h3>
+                        </div>
+                        <p class="mt-4 text-sm leading-6 text-gray-600">{{ $membership->description }}</p>
+                        <p class="mt-6 flex items-baseline gap-x-1">
+                            <!-- Price, update based on frequency toggle state -->
+                            <span class="text-4xl font-bold tracking-tight text-gray-900">${{ $membership->price }}</span>
+                            <!-- Payment frequency, update based on frequency toggle state -->
+                            <span class="text-sm font-semibold leading-6 text-gray-600">/month</span>
+                        </p>
+                        <a href="{{ route('memberships.show', $membership->id) }}" aria-describedby="tier-{{ Str::slug($membership->name) }}" class="flex mt-8 justify-center rounded-md bg-duty px-4 py-2 text-lg font-semibold leading-6 text-white shadow-sm hover:bg-fun focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fun tracking-widest font-NovecentoCondBold uppercase">View Details</a>
+                        @if(is_array($membership->features))
+                        <ul role="list" class="mt-8 space-y-3 text-sm leading-6 text-gray-600 xl:mt-10">
+                            @foreach($membership->features as $feature)
+                            <li class="flex gap-x-3">
+                                <svg class="h-6 w-5 flex-none text-fun" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" />
+                                </svg>
+                                {{ $feature }}
+                            </li>
+                            @endforeach
+                        </ul>
+                        @else
+                        <p>No features listed</p>
+                        @endif
+                    </div>
+                    @endforeach
+                </div>
             </div>
-           
-            
-              </div>
-            </div>
+        </div>
+        
           </div>
           
 
@@ -205,15 +203,16 @@
         <h2 id="collection-heading" class="text-2xl font-bold tracking-tight text-gray-900">Recent Blog Posts</h2>
 
         <div class="mt-10 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-8 lg:space-y-0">
-            @foreach($blogPosts as $post)
-            <a href="{{ route('posts.show', $post->id) }}" class="group block">
-                <div aria-hidden="true" class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75">
-                    <img src="{{ asset($post->image) }}" alt="{{ $post->title }}" class="h-full w-full object-cover object-center">
-                </div>
-                <h3 class="mt-4 text-lg  font-semibold text-duty">{{ $post->title }}</h3>
-                <p class="mt-2 text-sm text-gray-500">{{ Str::limit($post->content, 100) }}</p>
-            </a>
-            @endforeach
+          @foreach($blogPosts as $post)
+          <a href="{{ route('posts.show', $post->id) }}" class="group block">
+              <div aria-hidden="true" class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg lg:aspect-h-6 lg:aspect-w-5 group-hover:opacity-75">
+                  <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="h-full w-full object-cover object-center">
+              </div>
+              <h3 class="mt-4 text-lg font-semibold text-duty">{{ $post->title }}</h3>
+              <p class="mt-2 text-sm text-gray-500">{{ Str::limit($post->content, 100) }}</p>
+          </a>
+      @endforeach
+      
         </div>
     </section>
 

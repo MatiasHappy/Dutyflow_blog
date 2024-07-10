@@ -27,7 +27,7 @@
                         <td class="border px-4 py-2">{{ $post->category->name ?? 'Uncategorized' }}</td>
                         <td class="border px-4 py-2">
                             @if($post->image)
-                                <img src="{{ asset('storage/app/' . $post->image) }}" alt="{{ $post->title }}" class="h-16 w-16 object-cover">
+                                <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="h-16 w-16 object-cover">
                             @else
                                 <span>No Image</span>
                             @endif

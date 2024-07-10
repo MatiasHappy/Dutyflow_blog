@@ -50,7 +50,7 @@
                             <div class="flex h-16 items-center justify-between">
                               <!-- Logo (lg+) -->
                               <div class="hidden lg:flex lg:flex-1 lg:items-center">
-                                <a href="#">
+                                <a href="/">
                                   <span class="sr-only">dutyflow</span>
                                   <img src="{{ asset('imgs/logo2.png') }}" class="h-8 w-auto"  alt="DUTYFLOW">
                                 </a>

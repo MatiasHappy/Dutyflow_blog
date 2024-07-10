@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 use App\Models\BlogPost;
 use App\Models\User;
 use App\Models\Category;
-use Illuminate\Support\Facades\Hash;
 
 class BlogPostSeeder extends Seeder
 {
@@ -14,25 +13,6 @@ class BlogPostSeeder extends Seeder
      */
     public function run()
     {
-        // Ensure there are users to associate with blog posts
-        $user1 = User::firstOrCreate(
-            ['email' => 'mats1@example.com'],
-            [
-                'name' => 'Mats Johnson',
-                'password' => Hash::make('password'),
-                'is_admin' => true,
-            ]
-        );
-
-        $user2 = User::firstOrCreate(
-            ['email' => 'mats2@example.com'],
-            [
-                'name' => 'Emily Davis',
-                'password' => Hash::make('password'),
-                'is_admin' => false,
-            ]
-        );
-
         // Ensure there are categories to associate with blog posts
         $categories = [
             'Duty' => Category::firstOrCreate(['name' => 'Duty']),
@@ -42,6 +22,10 @@ class BlogPostSeeder extends Seeder
             'Wellness' => Category::firstOrCreate(['name' => 'Wellness']),
         ];
 
+        // Fetch existing users to associate with blog posts
+        $user1 = User::where('email', 'john@example.com')->first();
+        $user2 = User::where('email', 'jane@example.com')->first();
+
         // Create blog posts with realistic data
         $posts = [
             [
@@ -50,7 +34,7 @@ class BlogPostSeeder extends Seeder
                 'user_id' => $user1->id,
                 'published_at' => now(),
                 'category_id' => $categories['Duty']->id,
-                'image' => 'images/tips_duties.jpg',
+                'image' => 'images/1.jpg',
             ],
             [
                 'title' => 'Building Healthy Habits: A Guide to Success',
@@ -58,7 +42,7 @@ class BlogPostSeeder extends Seeder
                 'user_id' => $user1->id,
                 'published_at' => now(),
                 'category_id' => $categories['Habit']->id,
-                'image' => 'images/healthy_habits.jpg',
+                'image' => 'images/2.jpg',
             ],
             [
                 'title' => '10 Fun Activities to Boost Your Mood',
@@ -66,7 +50,7 @@ class BlogPostSeeder extends Seeder
                 'user_id' => $user2->id,
                 'published_at' => now(),
                 'category_id' => $categories['Fun']->id,
-                'image' => 'images/fun_activities.jpg',
+                'image' => 'images/3.jpg',
             ],
             [
                 'title' => 'How to Balance Work and Personal Life',
@@ -74,7 +58,7 @@ class BlogPostSeeder extends Seeder
                 'user_id' => $user2->id,
                 'published_at' => now(),
                 'category_id' => $categories['Duty']->id,
-                'image' => 'images/work_life_balance.jpg',
+                'image' => 'images/4.jpg',
             ],
             [
                 'title' => 'Maximizing Productivity with Simple Techniques',
@@ -82,7 +66,7 @@ class BlogPostSeeder extends Seeder
                 'user_id' => $user1->id,
                 'published_at' => now(),
                 'category_id' => $categories['Productivity']->id,
-                'image' => 'images/max_productivity.jpg',
+                'image' => 'images/5.jpg',
             ],
             [
                 'title' => 'The Importance of Wellness in Daily Life',
@@ -90,7 +74,7 @@ class BlogPostSeeder extends Seeder
                 'user_id' => $user2->id,
                 'published_at' => now(),
                 'category_id' => $categories['Wellness']->id,
-                'image' => 'images/daily_wellness.jpg',
+                'image' => 'images/6.jpg',
             ],
         ];
 

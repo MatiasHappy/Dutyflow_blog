@@ -25,7 +25,7 @@
             </div>
             <div class="mb-4">
                 <label for="published_at" class="block text-gray-700 text-sm font-bold mb-2">Publish Date</label>
-                <input type="datetime-local" id="published_at" name="published_at" value="{{ old('published_at', $post->published_at ? $post->published_at->format('Y-m-d\TH:i') : '') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <input type="datetime-local" id="published_at" name="published_at" value="{{ old('published_at', $post->published_at ) }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             </div>
             <div class="mb-4">
                 <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image</label>

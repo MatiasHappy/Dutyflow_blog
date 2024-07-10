@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Membership;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MembershipController extends Controller
 {
@@ -24,8 +26,9 @@ class MembershipController extends Controller
         return redirect()->route('admin.memberships.index');
     }
 
-    public function show(Membership $membership)
+    public function show($id)
     {
+        $membership = Membership::findOrFail($id);
         return view('memberships.show', compact('membership'));
     }
 
@@ -85,22 +88,29 @@ class MembershipController extends Controller
 
 
 
-    public function subscribe(Request $request)
+    public function subscribe(Request $request, $id)
     {
-        $request->validate([
-            'membership_id' => 'required|exists:memberships,id',
-        ]);
-
+        $membership = Membership::findOrFail($id);
         $user = Auth::user();
-        $membership = Membership::find($request->membership_id);
 
-        if ($user && $membership) {
-            $user->membership()->associate($membership);
-            $user->save();
+        // Check for an existing active subscription
+        $existingSubscription = Subscription::where('user_id', $user->id)
+                                            ->where('status', 'active')
+                                            ->first();
 
-            return redirect()->route('memberships.index')->with('success', 'You have successfully subscribed to the membership.');
+        if ($existingSubscription) {
+            // Update the existing subscription to inactive
+            $existingSubscription->update(['status' => 'inactive']);
         }
 
-        return redirect()->route('memberships.index')->with('error', 'Failed to subscribe to the membership.');
+        // Create a new active subscription
+        Subscription::create([
+            'user_id' => $user->id,
+            'membership_id' => $id,
+            'status' => 'active',
+        ]);
+
+        return redirect()->route('memberships.show', $membership->id)
+                         ->with('success', 'Subscribed successfully.');
     }
 }

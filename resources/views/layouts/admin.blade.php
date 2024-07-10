@@ -16,7 +16,7 @@
                         <a href="{{ url('/') }}" class="text-gray-900 hover:text-blue-500">Admin Panel</a>
                     </div>
                     <ul class="flex space-x-4">
-                        <li><a href="{{ url('/') }}" class="text-gray-700 hover:text-blue-500">Home</a></li>
+                        <li><a href="{{ url('/dashboard') }}" class="text-gray-700 hover:text-blue-500">Home</a></li>
                         <li><a href="{{ route('admin.posts.index') }}" class="text-gray-700 hover:text-blue-500">Manage Blog Posts</a></li>
                         <li><a href="{{ route('admin.memberships.index') }}" class="text-gray-700 hover:text-blue-500">Manage Memberships</a></li>
                         <li><a href="{{ route('admin.posts.create') }}" class="text-gray-700 hover:text-blue-500">Create Post</a></li>
